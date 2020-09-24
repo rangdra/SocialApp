@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -10,11 +10,14 @@ import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import {fonts} from '../utils';
+import {AuthContext} from '../navigation/AuthProvider';
 
 const SignUpScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+
+  const {register} = useContext(AuthContext);
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -24,7 +27,7 @@ const SignUpScreen = ({navigation}) => {
             labelValue={email}
             placeholderText="Email"
             onChangeText={(userEmail) => setEmail(userEmail)}
-            isUser
+            iconType="user"
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
@@ -45,7 +48,7 @@ const SignUpScreen = ({navigation}) => {
           />
           <FormButton
             buttonTitle="Sign Up"
-            onPress={() => alert('button clicked')}
+            onPress={() => register(email, password)}
           />
           <View style={styles.textPrivate}>
             <Text style={styles.color_textPrivate}>
@@ -66,10 +69,11 @@ const SignUpScreen = ({navigation}) => {
             color="#4867aa"
             backgroundColor="#e6eaf4"
             onPress={() => {}}
+            btnType="facebook"
           />
           <SocialButton
             buttonTitle="Sign Up with Google"
-            isGoogle
+            btnType="google"
             color="#de4d41"
             backgroundColor="#f5e7ea"
             onPress={() => {}}

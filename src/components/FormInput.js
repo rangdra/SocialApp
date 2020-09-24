@@ -1,23 +1,28 @@
 import React from 'react';
 import {Image, StyleSheet, TextInput, View} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {fonts} from '../utils';
 import {windowHeigth, windowWidth} from '../utils/Dimentions';
+
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 
 export default function FormInput({
   labelValue,
   placeholderText,
-  isUser,
+  iconType,
   ...rest
 }) {
-  const icon = isUser
-    ? require('../images/icon-user.png')
-    : require('../images/icon-lock.png');
+  let icons;
+  if (iconType === 'user') {
+    icons = require('../images/icon-user.png');
+  } else if (iconType === 'lock') {
+    icons = require('../images/icon-lock.png');
+  }
   return (
     <View style={styles.inputContainer}>
       <View style={styles.iconType}>
         {/* <AntDesign name={iconType} size={25} color="#666" /> */}
-        <Image source={icon} style={{width: 25, height: 25, color: '#666'}} />
+        <Image source={icons} style={{width: 25, height: 25}} />
       </View>
       <TextInput
         value={labelValue}

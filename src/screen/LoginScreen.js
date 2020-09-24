@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   StyleSheet,
   Image,
@@ -11,33 +11,111 @@ import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import {fonts} from '../utils';
+import {AuthContext} from '../navigation/AuthProvider';
+import * as Animatable from 'react-native-animatable';
 
 const LoginScreen = ({navigation}) => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  // const [email, setEmail] = useState();
+  // const [password, setPassword] = useState();
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+    isValidEmail: true,
+    isValidPassword: true,
+  });
+
+  const textInputChange = (val) => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        email: val,
+        isValidEmail: true,
+      });
+    } else {
+      setData({
+        ...data,
+        email: val,
+        isValidEmail: false,
+      });
+    }
+  };
+
+  const handlePassword = (val) => {
+    if (val.trim().length >= 5) {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: true,
+      });
+    } else {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: false,
+      });
+    }
+  };
+
+  const handleValidUser = (val) => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        isValidEmail: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidEmail: false,
+      });
+    }
+  };
+  const {login} = useContext(AuthContext);
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
-        <Image source={require('../images/logo.png')} style={styles.logo} />
+        <Image
+          source={require('../images/rn-social-logo.png')}
+          style={styles.logo}
+        />
         <Text style={styles.text}>RP Social App</Text>
         <FormInput
-          labelValue={email}
+          labelValue={data.email}
           placeholderText="Email"
-          onChangeText={(userEmail) => setEmail(userEmail)}
+          // onChangeText={(userEmail) => setEmail(userEmail)}
+          onChangeText={(val) => textInputChange(val)}
+          onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
           keyboardType="email-address"
           autoCapitalize="none"
-          isUser
+          iconType="user"
           autoCorrect={false}
         />
+        {data.isValidEmail ? null : (
+          <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>
+              Username must be 4 characters long.
+            </Text>
+          </Animatable.View>
+        )}
         <FormInput
-          labelValue={password}
+          labelValue={data.password}
           placeholderText="Password"
-          onChangeText={(userPassword) => setPassword(userPassword)}
+          // onChangeText={(userPassword) => setPassword(userPassword)}
+          onChangeText={(val) => handlePassword(val)}
           secureTextType={true}
+          iconType="lock"
         />
+        {data.isValidPassword ? null : (
+          <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>
+              Password must be 8 characters long.
+            </Text>
+          </Animatable.View>
+        )}
         <FormButton
-          buttonTitle="Sign Up"
-          onPress={() => alert('button clicked')}
+          buttonTitle="Sign In"
+          // onPress={() => login(email, password)}
+          onPress={() => login(data.email, data.password)}
         />
         <TouchableOpacity style={styles.forgotButton}>
           <Text style={styles.navButtonText}>Forgot Password</Text>
@@ -45,12 +123,13 @@ const LoginScreen = ({navigation}) => {
         <SocialButton
           buttonTitle="Sign In with Facebook"
           color="#4867aa"
+          btnType="facebook"
           backgroundColor="#e6eaf4"
           onPress={() => {}}
         />
         <SocialButton
           buttonTitle="Sign In with Google"
-          isGoogle
+          btnType="google"
           color="#de4d41"
           backgroundColor="#f5e7ea"
           onPress={() => {}}
@@ -99,5 +178,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#2e64e5',
     fontFamily: fonts.secondary.normal,
+  },
+  errorMsg: {
+    color: '#FF0000',
+    fontSize: 14,
   },
 });

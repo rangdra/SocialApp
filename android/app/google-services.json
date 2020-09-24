@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "534867654641",
+    "firebase_url": "https://social-app-febe1.firebaseio.com",
+    "project_id": "social-app-febe1",
+    "storage_bucket": "social-app-febe1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534867654641:android:32c5bcd7b48fef7cd8f650",
+        "android_client_info": {
+          "package_name": "com.socialapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534867654641-sm17eq15gk6uf163g2t6c2jrtcfu416g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_DpEXeIbyVkGVTAUK9yYYiNanLl95LUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534867654641-sm17eq15gk6uf163g2t6c2jrtcfu416g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,18 +7,22 @@ import {fonts} from '../utils';
 
 const SocialButton = ({
   buttonTitle,
-  isGoogle,
   color,
+  btnType,
   backgroundColor,
   ...rest
 }) => {
-  let bgColor = backgroundColor;
-  const icon = isGoogle
-    ? require('../images/google.png')
-    : require('../images/facebook.png');
+  // let bgColor = backgroundColor;
+  let socialType;
+  if (btnType === 'google') {
+    socialType = require('../images/google.png');
+  } else if (btnType === 'facebook') {
+    socialType = require('../images/facebook.png');
+  }
   return (
     <TouchableOpacity
-      style={[styles.buttonContainer, {backgroundColor: bgColor}]}
+      // style={[styles.buttonContainer, {backgroundColor: bgColor}]}
+      style={styles.buttonContainer(backgroundColor)}
       {...rest}>
       <View style={styles.iconWrapper}>
         {/* <FontAwesome
@@ -27,7 +31,7 @@ const SocialButton = ({
           size={22}
           color={color}
         /> */}
-        <Image source={icon} style={[styles.icon]} />
+        <Image source={socialType} style={styles.icon} />
       </View>
       <View style={styles.btnTextWrapper}>
         <Text style={[styles.buttonText, {color: color}]}>{buttonTitle}</Text>
@@ -39,14 +43,15 @@ const SocialButton = ({
 export default SocialButton;
 
 const styles = StyleSheet.create({
-  buttonContainer: {
+  buttonContainer: (backgroundColor) => ({
     marginTop: 10,
     width: '100%',
     height: windowHeigth / 15,
     padding: 10,
     flexDirection: 'row',
     borderRadius: 3,
-  },
+    backgroundColor: backgroundColor,
+  }),
   iconWrapper: {
     width: 30,
     justifyContent: 'center',

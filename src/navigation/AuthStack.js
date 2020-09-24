@@ -56,7 +56,7 @@ const AuthStack = () => {
           },
           headerLeft: () => (
             <TouchableOpacity
-              style={{marginLeft: 10}}
+              style={{marginLeft: 15}}
               onPress={() => navigation.navigate('Login')}>
               {/* <FontAwesome.Button
                 name="long-arrow-left"

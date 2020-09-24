@@ -13,7 +13,7 @@ const OnboardingScreen = ({navigation}) => {
           image: (
             <Image
               style={styles.logoOnboarding}
-              source={require('../images/onboarding-img-1.png')}
+              source={require('../images/onboarding-img1.png')}
             />
           ),
           title: 'Content',
@@ -21,13 +21,13 @@ const OnboardingScreen = ({navigation}) => {
         },
         {
           backgroundColor: '#fdeb93',
-          image: <Image source={require('../images/onboarding3.png')} />,
+          image: <Image source={require('../images/onboarding-img2.png')} />,
           title: 'Project Team',
           subtitle: 'Done with React Native Onboarding Swiper',
         },
         {
           backgroundColor: '#e9bcbe',
-          image: <Image source={require('../images/onboarding-img-3.png')} />,
+          image: <Image source={require('../images/onboarding-img3.png')} />,
           title: 'Solutions',
           subtitle: 'Done with React Native Onboarding Swiper',
         },
